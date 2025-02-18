@@ -64,6 +64,7 @@ function App() {
               value={fromText}
               onChange={setFromText}
               type={SelectorType.From}
+              languageCode={fromLanguage}
             />
           </Stack>
         </Col>
@@ -89,6 +90,7 @@ function App() {
               value={result}
               type={SelectorType.To}
               loading={loading}
+              languageCode={toLanguage}
             />
           </Stack>
         </Col>

@@ -1,6 +1,6 @@
 import { Button, Form } from "react-bootstrap";
 import { SelectorType } from "../types.d";
-import { CopyToClipboardIcon } from "./Icons";
+import { CopyToClipboardIcon, TextToSpeechIcon } from "./Icons";
 
 interface Props {
   type: SelectorType;
@@ -24,7 +24,13 @@ const getPlaceholder = ({
   if (type === SelectorType.To) return "Translation";
 };
 
-export const TranslationArea = ({ loading, type, value, onChange }: Props) => {
+export const TranslationArea = ({
+  loading,
+  type,
+  value,
+  onChange,
+  languageCode,
+}: Props) => {
   const styles =
     type === SelectorType.From
       ? commonStyles
@@ -38,6 +44,12 @@ export const TranslationArea = ({ loading, type, value, onChange }: Props) => {
     navigator.clipboard.writeText(value);
   };
 
+  const handleTextToSpeech = () => {
+    const utterance = new SpeechSynthesisUtterance(value);
+    utterance.lang = languageCode;
+    speechSynthesis.speak(utterance);
+  };
+
   return (
     <div style={{ position: "relative" }}>
       <Form.Control
@@ -49,9 +61,14 @@ export const TranslationArea = ({ loading, type, value, onChange }: Props) => {
         onChange={handleChange}
         disabled={type === SelectorType.To}
       />
-      <div style={{ position: "absolute", left: 0, bottom: 0 }}>
+      <div
+        style={{ position: "absolute", left: 0, bottom: 0, display: "flex" }}
+      >
         <Button variant="link" onClick={handleCopyToClipboard}>
           <CopyToClipboardIcon />
+        </Button>
+        <Button variant="link" onClick={handleTextToSpeech}>
+          <TextToSpeechIcon />
         </Button>
       </div>
     </div>

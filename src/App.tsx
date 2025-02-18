@@ -6,7 +6,7 @@ import { AUTO_LANGUAGE } from "./constants";
 import { InterchangeIcon } from "./components/Icons";
 import { LanguageSelector } from "./components/LanguageSelector";
 import { SelectorType } from "./types.d";
-import { TextArea } from "./components/TextArea";
+import { TranslationArea } from "./components/TranslationArea";
 import { useEffect } from "react";
 import { translate } from "./services/translator";
 import { useDebounce } from "./hooks/useDebounce";
@@ -60,7 +60,7 @@ function App() {
               value={fromLanguage}
               onChange={setFromLanguage}
             />
-            <TextArea
+            <TranslationArea
               value={fromText}
               onChange={setFromText}
               type={SelectorType.From}
@@ -85,7 +85,11 @@ function App() {
               value={toLanguage}
               onChange={setToLanguage}
             />
-            <TextArea value={result} type={SelectorType.To} loading={loading} />
+            <TranslationArea
+              value={result}
+              type={SelectorType.To}
+              loading={loading}
+            />
           </Stack>
         </Col>
       </Row>

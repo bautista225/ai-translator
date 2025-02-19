@@ -1,6 +1,6 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useStore } from "./hooks/useStore";
+import { useTranslation } from "./hooks/useTranslation";
 import { Button, Col, Container, Row, Stack } from "react-bootstrap";
 import { AUTO_LANGUAGE, DEBOUNCE_DELAY } from "./constants";
 import { InterchangeIcon } from "./components/Icons";
@@ -23,12 +23,13 @@ function App() {
     setResult,
     setFromText,
     interchangeLanguages,
-  } = useStore();
+  } = useTranslation();
 
   const debouncedFromText = useDebounce(fromText, DEBOUNCE_DELAY);
 
   useEffect(() => {
     console.log("Using translation service");
+    console.log(fromText);
     if (fromText === "") {
       setResult("");
       return;
@@ -41,7 +42,8 @@ function App() {
         if (Array.isArray(result)) result = result.join("");
         setResult(result);
       })
-      .catch(() => {
+      .catch((error) => {
+        console.log({ error });
         setResult("Error");
       });
   }, [debouncedFromText, fromLanguage, toLanguage]);

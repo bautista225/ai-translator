@@ -3,6 +3,7 @@ export const SUPPORTED_LANGUAGES = {
   es: "Spanish",
   fr: "French",
 };
+//English, French, German, Spanish, Portuguese, Italian, Mandarin, Korean, Japanese, and Arabic.
 
 export const AUTO_LANGUAGE = "auto";
 

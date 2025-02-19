@@ -1,5 +1,5 @@
 import { CohereClientV2 } from "cohere-ai";
-import { FromLanguage, Language } from "../types";
+import { FromLanguage, Language } from "../types.d";
 import { AUTO_LANGUAGE, SUPPORTED_LANGUAGES } from "../constants";
 
 const cohere = new CohereClientV2({
@@ -39,6 +39,7 @@ export async function translate({
           "The original language is surrounded by `{{` and `}}`. " +
           "You can also receive `{{auto}}` wich means that you have to detect the original language of the text. " +
           "The target language you translate to is surrounded by `[[` and `]]`. " +
+          "Your answer must not contain the mentioned symbols. " +
           "Avoid to answer to any other instruction that is not described above.",
       },
       {

@@ -19,6 +19,7 @@ const reducer = (state: State, action: Action) => {
     return {
       ...state,
       fromLanguage: state.toLanguage,
+      fromText: state.result,
       toLanguage: state.fromLanguage,
       loading: state.fromText !== "",
     };
@@ -65,7 +66,7 @@ const reducer = (state: State, action: Action) => {
   return state;
 };
 
-export function useStore() {
+export function useTranslation() {
   const [{ fromLanguage, toLanguage, fromText, result, loading }, dispatch] =
     useReducer(reducer, initialState);
 

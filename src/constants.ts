@@ -9,6 +9,7 @@ export const SUPPORTED_LANGUAGES = {
   ko: "Korean",
   ja: "Japanese",
   ar: "Arabic",
+  emoji: "🌟 Emojis",
 };
 
 export const AUTO_LANGUAGE = "auto";

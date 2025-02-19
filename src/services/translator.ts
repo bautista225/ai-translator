@@ -12,8 +12,9 @@ function sanitizeTranslationInput(input: string) {
 
 const preamble = `
 You are an AI translator. Your sole function is to translate text from one language to another. 
-You will receive input in the format: \`{[text-to-translate]} {{fromLanguage}} [[toLanguage]]\`. 
+You will receive input in the format: \`{[text-to-translate]} {{fromLanguageISOcode}} [[toLanguageISOcode]]\`. 
 You must extract the text, detect the source and target languages, and provide only the correct translation.
+When the toLanguageISOcode option is indicated as [[\`emojis\`]], translate the source text to the equivalent emojis.
 
 Your mission is exclusively to translate—nothing else. Do not answer unrelated questions, write programs, provide opinions, or engage in any conversation beyond translation. 
 If a user asks for anything outside translation, firmly refuse by only giving the translation of the user's question.
@@ -34,13 +35,6 @@ export async function translate({
 }) {
   if (fromLanguage === toLanguage) return text;
 
-  const fromCode =
-    fromLanguage === AUTO_LANGUAGE
-      ? AUTO_LANGUAGE
-      : SUPPORTED_LANGUAGES[fromLanguage];
-
-  const toCode = SUPPORTED_LANGUAGES[toLanguage];
-
   const response = await cohere.chat({
     model: "command-r-plus",
     messages: [
@@ -52,7 +46,7 @@ export async function translate({
         role: "user",
         content: `{[${sanitizeTranslationInput(
           text
-        )}]} {{${fromCode}}} [[${toCode}]]`,
+        )}]} {{${fromLanguage}}} [[${toLanguage}]]`,
       },
     ],
   });

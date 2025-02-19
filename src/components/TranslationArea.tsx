@@ -41,7 +41,7 @@ export const TranslationArea = ({
       ? commonStyles
       : { ...commonStyles, backgroundColor: "#f5f5f5" };
 
-  const handleChange = (event: .ChangeEvent<HTMLTextAreaElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (onChange) onChange(event.target.value);
   };
 

@@ -7,7 +7,7 @@ const cohere = new CohereClientV2({
 });
 
 function sanitizeTranslationInput(input: string) {
-  return input.replace(/(\{\{.*?\}\}|\[\[.*?\]\])/g, "");
+  return input.replace(/(\{\{.*?\}\}|\[\[.*?\]\]|\{\[.*?\]\})/g, "");
 }
 
 export async function translate({
@@ -45,9 +45,9 @@ export async function translate({
       },
       {
         role: "user",
-        content: `${sanitizeTranslationInput(
+        content: `{[${sanitizeTranslationInput(
           text
-        )} {{${fromCode}}} [[${toCode}]]`,
+        )}]} {{${fromCode}}} [[${toCode}]]`,
       },
     ],
   });

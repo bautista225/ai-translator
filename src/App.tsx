@@ -46,7 +46,9 @@ function App() {
       })
       .catch((error) => {
         console.log({ error });
-        setResult("Error while translating. Try refreshing the page.");
+        setResult(
+          "Error while translating with Cohere. Try refreshing the page."
+        );
       });
   }, [debouncedFromText, fromLanguage, toLanguage]);
 
@@ -55,7 +57,7 @@ function App() {
       <Container fluid>
         <h1>AI translator</h1>
         <p>
-          <em>with cohere technology</em>
+          <em>with Cohere technology</em>
         </p>
         <Row>
           <Col>

@@ -1,6 +1,5 @@
 import { CohereClientV2 } from "cohere-ai";
 import { FromLanguage, Language } from "../types.d";
-import { AUTO_LANGUAGE, SUPPORTED_LANGUAGES } from "../constants";
 
 const cohere = new CohereClientV2({
   token: import.meta.env.VITE_COHERE_API_KEY,

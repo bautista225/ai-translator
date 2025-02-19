@@ -1,6 +1,7 @@
 import { Button, Form } from "react-bootstrap";
 import { SelectorType } from "../types.d";
 import { CopyToClipboardIcon, TextToSpeechIcon } from "./Icons";
+import { CSSProperties } from "react";
 
 interface Props {
   type: SelectorType;
@@ -10,7 +11,11 @@ interface Props {
   languageCode: string;
 }
 
-const commonStyles = { border: 0, height: "200px", resize: "none" };
+const commonStyles: CSSProperties = {
+  border: 0,
+  height: "200px",
+  resize: "none",
+};
 
 const getPlaceholder = ({
   type,
@@ -37,7 +42,7 @@ export const TranslationArea = ({
       : { ...commonStyles, backgroundColor: "#f5f5f5" };
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    onChange(event.target.value);
+    if (onChange) onChange(event.target.value);
   };
 
   const handleCopyToClipboard = () => {

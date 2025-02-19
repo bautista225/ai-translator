@@ -10,6 +10,7 @@ import { TranslationArea } from "./components/TranslationArea";
 import { useEffect } from "react";
 import { translate } from "./services/translator";
 import { useDebounce } from "./hooks/useDebounce";
+import { FooterBar } from "./components/FooterBar";
 
 function App() {
   const {
@@ -29,8 +30,9 @@ function App() {
 
   useEffect(() => {
     console.log("Using translation service");
-    console.log(fromText);
-    if (fromText === "") {
+    console.log(debouncedFromText);
+
+    if (debouncedFromText === "") {
       setResult("");
       return;
     }
@@ -44,60 +46,63 @@ function App() {
       })
       .catch((error) => {
         console.log({ error });
-        setResult("Error");
+        setResult("Error while translating. Try refreshing the page.");
       });
   }, [debouncedFromText, fromLanguage, toLanguage]);
 
   return (
-    <Container fluid>
-      <h1>AI translator</h1>
-      <p>
-        <em>with cohere technology</em>
-      </p>
-      <Row>
-        <Col>
-          <Stack gap={2}>
-            <LanguageSelector
-              type={SelectorType.From}
-              value={fromLanguage}
-              onChange={setFromLanguage}
-            />
-            <TranslationArea
-              value={fromText}
-              onChange={setFromText}
-              type={SelectorType.From}
-              languageCode={fromLanguage}
-            />
-          </Stack>
-        </Col>
-        <Col xs="auto">
-          <Button
-            variant="link"
-            disabled={fromLanguage === AUTO_LANGUAGE}
-            onClick={() => {
-              interchangeLanguages();
-            }}
-          >
-            <InterchangeIcon />
-          </Button>
-        </Col>
-        <Col>
-          <Stack gap={2}>
-            <LanguageSelector
-              type={SelectorType.To}
-              value={toLanguage}
-              onChange={setToLanguage}
-            />
-            <TranslationArea
-              value={result}
-              type={SelectorType.To}
-              loading={loading}
-              languageCode={toLanguage}
-            />
-          </Stack>
-        </Col>
-      </Row>
-    </Container>
+    <div className="app">
+      <Container fluid>
+        <h1>AI translator</h1>
+        <p>
+          <em>with cohere technology</em>
+        </p>
+        <Row>
+          <Col>
+            <Stack gap={2}>
+              <LanguageSelector
+                type={SelectorType.From}
+                value={fromLanguage}
+                onChange={setFromLanguage}
+              />
+              <TranslationArea
+                value={fromText}
+                onChange={setFromText}
+                type={SelectorType.From}
+                languageCode={fromLanguage}
+              />
+            </Stack>
+          </Col>
+          <Col xs="auto">
+            <Button
+              variant="link"
+              disabled={fromLanguage === AUTO_LANGUAGE}
+              onClick={() => {
+                interchangeLanguages();
+              }}
+            >
+              <InterchangeIcon />
+            </Button>
+          </Col>
+          <Col>
+            <Stack gap={2}>
+              <LanguageSelector
+                type={SelectorType.To}
+                value={toLanguage}
+                onChange={setToLanguage}
+              />
+              <TranslationArea
+                value={result}
+                type={SelectorType.To}
+                loading={loading}
+                languageCode={toLanguage}
+              />
+            </Stack>
+          </Col>
+        </Row>
+      </Container>
+      <FooterBar />
+    </div>
   );
 }
 

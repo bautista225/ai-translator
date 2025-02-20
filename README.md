@@ -59,3 +59,6 @@ Run an instance in localhost:5173 with:
 ```
 pnpm run dev
 ```
+
+## ✨ Contributions
+Contributions are welcome! If you have ideas to enhance the AI translator App —whether it’s adding new features, improving the design, or expanding the content— feel free to submit a pull request. You can also share suggestions or feedback to help make this project even better!

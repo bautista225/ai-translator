@@ -62,3 +62,6 @@ pnpm run dev
 
 ## ✨ Contributions
 Contributions are welcome! If you have ideas to enhance the AI translator App —whether it’s adding new features, improving the design, or expanding the content— feel free to submit a pull request. You can also share suggestions or feedback to help make this project even better!
+
+## ⭐ Support
+If you find AI translator App helpful or you like what we're doing, please consider giving the repository a star! It's a quick way to show your support for this project.
